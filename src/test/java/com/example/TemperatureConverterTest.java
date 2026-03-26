@@ -94,4 +94,12 @@ class TemperatureConverterTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Kelvin cannot be negative");
     }
+
+    @Test
+    @DisplayName("null rounding strategy throws NullPointerException")
+    void nullRoundingThrows() {
+        assertThatThrownBy(() -> new TemperatureConverter(null))
+                .isInstanceOf(NullPointerException.class)
+                .hasMessageContaining("rounding must not be null");
+    }
 }

@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.Objects;
+
 /**
  * Converts temperatures between Celsius, Fahrenheit, and Kelvin.
  * Uses constructor-injected {@link RoundingStrategy} for output precision.
@@ -9,7 +11,7 @@ public class TemperatureConverter {
     private final RoundingStrategy rounding;
 
     public TemperatureConverter(RoundingStrategy rounding) {
-        this.rounding = rounding;
+        this.rounding = Objects.requireNonNull(rounding, "rounding must not be null");
     }
 
     public double celsiusToFahrenheit(double celsius) {
