@@ -36,6 +36,10 @@ public class TemperatureConverter {
         return rounding.round(kelvin - 273.15);
     }
 
+    public double fahrenheitToKelvin(double fahrenheit) {
+        return rounding.round((fahrenheit - 32) * 5.0 / 9.0 + 273.15);
+    }
+
     /**
      * Strategy interface for rounding output values (boundary for mocking).
      */
