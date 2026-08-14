@@ -94,4 +94,32 @@ class ClampTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("min > max");
     }
+
+    // --- long clamp ---
+
+    @Test
+    @DisplayName("returns long value when within range")
+    void longWithinRange() {
+        assertThat(Clamp.clamp(5L, 0L, 10L)).isEqualTo(5L);
+    }
+
+    @Test
+    @DisplayName("floors long at min when below range")
+    void longBelowRange() {
+        assertThat(Clamp.clamp(-1L, 0L, 10L)).isEqualTo(0L);
+    }
+
+    @Test
+    @DisplayName("caps long at max when above range")
+    void longAboveRange() {
+        assertThat(Clamp.clamp(11L, 0L, 10L)).isEqualTo(10L);
+    }
+
+    @Test
+    @DisplayName("throws when min > max for long")
+    void longInvalidRangeThrows() {
+        assertThatThrownBy(() -> Clamp.clamp(1L, 5L, 4L))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("min > max");
+    }
 }
