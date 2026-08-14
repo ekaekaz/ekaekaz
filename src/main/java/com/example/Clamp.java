@@ -32,4 +32,16 @@ public final class Clamp {
         }
         return Math.max(min, Math.min(max, value));
     }
+
+    /**
+     * Clamps {@code value} to the range [{@code min}, {@code max}] for longs.
+     *
+     * @throws IllegalArgumentException if min &gt; max
+     */
+    public static long clamp(long value, long min, long max) {
+        if (min > max) {
+            throw new IllegalArgumentException("min > max");
+        }
+        return Math.max(min, Math.min(max, value));
+    }
 }
