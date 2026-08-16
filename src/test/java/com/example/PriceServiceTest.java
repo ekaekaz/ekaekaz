@@ -83,6 +83,20 @@ class PriceServiceTest {
     }
 
     @Test
+    @DisplayName("large base price is not affected by float rounding error")
+    void largeBasePriceAvoidsFloatPrecisionError() {
+        PriceService.PriceClient client = mock(PriceService.PriceClient.class);
+        // 16_777_210 is just below 2^24, the point beyond which float loses
+        // integer precision; casting it to float before the discount math
+        // silently rounds it, throwing off the result by whole units.
+        when(client.fetchPrice("BULK")).thenReturn(16_777_210);
+
+        PriceService svc = new PriceService(client);
+
+        assertThat(svc.discountedPrice("BULK", 14)).isEqualTo(14_428_401);
+    }
+
+    @Test
     @DisplayName("null client throws NullPointerException")
     void nullClientThrows() {
         assertThatThrownBy(() -> new PriceService(null))

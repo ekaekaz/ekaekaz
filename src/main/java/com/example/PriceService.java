@@ -28,7 +28,7 @@ public class PriceService {
                     "discountPercent must be 0-100, got " + discountPercent);
         }
         int base = client.fetchPrice(sku);
-        int discount = Math.round(base * (discountPercent / 100f));
+        int discount = (int) Math.round(base * (discountPercent / 100.0));
         return Math.max(0, base - discount);
     }
 
