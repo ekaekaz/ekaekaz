@@ -94,4 +94,16 @@ class ClampTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("min > max");
     }
+
+    @Test
+    @DisplayName("throws on NaN value instead of silently passing it through")
+    void doubleNaNValueThrows() {
+        // Math.max/Math.min propagate NaN instead of clamping it, so a NaN
+        // config value (e.g. from a 0/0 metric during service startup) would
+        // otherwise sail through unbounded and corrupt downstream config
+        // such as a thread-pool size or request-rate limit.
+        assertThatThrownBy(() -> Clamp.clamp(Double.NaN, 0.0, 100.0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("NaN");
+    }
 }

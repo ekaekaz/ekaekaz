@@ -24,11 +24,14 @@ public final class Clamp {
     /**
      * Clamps {@code value} to the range [{@code min}, {@code max}] for doubles.
      *
-     * @throws IllegalArgumentException if min &gt; max
+     * @throws IllegalArgumentException if min &gt; max, or if value is NaN
      */
     public static double clamp(double value, double min, double max) {
         if (min > max) {
             throw new IllegalArgumentException("min > max");
+        }
+        if (Double.isNaN(value)) {
+            throw new IllegalArgumentException("value is NaN");
         }
         return Math.max(min, Math.min(max, value));
     }
