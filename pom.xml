@@ -20,6 +20,7 @@
     <junit.jupiter.version>5.10.2</junit.jupiter.version>
     <mockito.version>5.11.0</mockito.version>
     <jacoco.version>0.8.11</jacoco.version>
+    <exec.mainClass>com.example.Main</exec.mainClass>
   </properties>
 
   <dependencyManagement>
@@ -62,6 +63,30 @@
 
   <build>
     <plugins>
+      <!-- Runnable jar: java -jar target/ekaekaz-1.0.0-SNAPSHOT.jar -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.1</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>${exec.mainClass}</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <!-- Fast local run: mvn -q compile exec:java -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <mainClass>${exec.mainClass}</mainClass>
+        </configuration>
+      </plugin>
+
       <!-- Unit tests -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -129,6 +154,7 @@
               </rules>
               <excludes>
                 <exclude>**/generated/**</exclude>
+                <exclude>**/Main.class</exclude>
               </excludes>
             </configuration>
           </execution>

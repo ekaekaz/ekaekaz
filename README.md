@@ -20,6 +20,21 @@ mvn -q verify
 open target/site/jacoco/index.html
 ```
 
+## Interactive Terminal CLI
+
+The project ships an interactive terminal menu (`com.example.Main`) that
+lets you try `Clamp`, `StringUtils`, `TemperatureConverter` and
+`PriceService` from the command line.
+
+```bash
+# Run directly from source
+mvn -q compile exec:java
+
+# Or build a runnable jar and run it
+mvn -q package -DskipTests
+java -jar target/ekaekaz-1.0.0-SNAPSHOT.jar
+```
+
 ## Project Structure
 
 ```
