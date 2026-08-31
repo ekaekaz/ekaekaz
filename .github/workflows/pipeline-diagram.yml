@@ -1,0 +1,39 @@
+name: Pipeline diagram
+
+on:
+  push:
+    branches: [devin/1774533846-java-unit-testing]
+    paths:
+      - '.github/workflows/*.yml'
+      - 'scripts/generate_pipeline_diagram.py'
+  workflow_dispatch:
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Generate diagram
+        run: python3 scripts/generate_pipeline_diagram.py
+
+      - name: Commit if changed
+        run: |
+          if ! git diff --quiet -- .github/PIPELINE.md; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .github/PIPELINE.md
+            git commit -m "docs: regenerate pipeline diagram"
+            git push
+          else
+            echo "No changes to .github/PIPELINE.md"
+          fi
