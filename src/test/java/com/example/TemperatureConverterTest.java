@@ -96,6 +96,18 @@ class TemperatureConverterTest {
     }
 
     @Test
+    @DisplayName("32F = 273.15K")
+    void fahrenheitToKelvinFreezing() {
+        assertThat(converter.fahrenheitToKelvin(32)).isCloseTo(273.15, within(0.01));
+    }
+
+    @Test
+    @DisplayName("212F = 373.15K")
+    void fahrenheitToKelvinBoiling() {
+        assertThat(converter.fahrenheitToKelvin(212)).isCloseTo(373.15, within(0.01));
+    }
+
+    @Test
     @DisplayName("null rounding strategy throws NullPointerException")
     void nullRoundingThrows() {
         assertThatThrownBy(() -> new TemperatureConverter(null))
