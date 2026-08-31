@@ -9,8 +9,12 @@ flowchart LR
   classDef error fill:#e2665b22,stroke:#e2665b,stroke-width:2px;
   subgraph ci ["ci"]
     ci_trigger(["workflow_dispatch / push / pull_request"])
-    ci_build["build\n4 steps"]
-    ci_trigger --> ci_build
+    ci_compile["compile\n3 steps"]
+    ci_trigger --> ci_compile
+    ci_test["test\n4 steps"]
+    ci_compile --> ci_test
+    ci_coverage["coverage\n4 steps"]
+    ci_test --> ci_coverage
   end
   subgraph claude_code_review ["Claude PR Review"]
     claude_code_review_trigger(["pull_request (opened, synchronize)"])
