@@ -46,6 +46,39 @@ public final class StringUtils {
     }
 
     /**
+     * Capitalizes the first character of the string and lowercases the rest.
+     *
+     * @param input the string to capitalize (may be null)
+     * @return capitalized string, or null if input is null
+     */
+    public static String capitalize(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+        return Character.toUpperCase(input.charAt(0)) + input.substring(1).toLowerCase();
+    }
+
+    /**
+     * Counts how many times {@code target} occurs in {@code input}.
+     *
+     * @param input the string to search (may be null)
+     * @param target the character to count
+     * @return number of occurrences, or 0 if input is null
+     */
+    public static int countOccurrences(String input, char target) {
+        if (input == null) {
+            return 0;
+        }
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == target) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
      * Truncates the string to the given max length, appending "..." if truncated.
      *
      * @param input the string to truncate (may be null)

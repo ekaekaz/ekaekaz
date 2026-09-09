@@ -84,6 +84,70 @@ class StringUtilsTest {
     }
 
     @Nested
+    @DisplayName("capitalize()")
+    class CapitalizeTest {
+
+        @Test
+        @DisplayName("capitalizes a lowercase word")
+        void lowercase() {
+            assertThat(StringUtils.capitalize("hello")).isEqualTo("Hello");
+        }
+
+        @Test
+        @DisplayName("lowercases the remainder of an uppercase word")
+        void uppercase() {
+            assertThat(StringUtils.capitalize("HELLO")).isEqualTo("Hello");
+        }
+
+        @Test
+        @DisplayName("returns null for null input")
+        void nullInput() {
+            assertThat(StringUtils.capitalize(null)).isNull();
+        }
+
+        @Test
+        @DisplayName("returns empty string unchanged")
+        void emptyInput() {
+            assertThat(StringUtils.capitalize("")).isEmpty();
+        }
+
+        @Test
+        @DisplayName("single character is upper-cased")
+        void singleChar() {
+            assertThat(StringUtils.capitalize("a")).isEqualTo("A");
+        }
+    }
+
+    @Nested
+    @DisplayName("countOccurrences()")
+    class CountOccurrencesTest {
+
+        @Test
+        @DisplayName("counts multiple occurrences")
+        void multiple() {
+            assertThat(StringUtils.countOccurrences("banana", 'a')).isEqualTo(3);
+        }
+
+        @Test
+        @DisplayName("returns 0 when character is absent")
+        void absent() {
+            assertThat(StringUtils.countOccurrences("banana", 'z')).isZero();
+        }
+
+        @Test
+        @DisplayName("returns 0 for null input")
+        void nullInput() {
+            assertThat(StringUtils.countOccurrences(null, 'a')).isZero();
+        }
+
+        @Test
+        @DisplayName("returns 0 for empty string")
+        void emptyInput() {
+            assertThat(StringUtils.countOccurrences("", 'a')).isZero();
+        }
+    }
+
+    @Nested
     @DisplayName("truncate()")
     class TruncateTest {
 
