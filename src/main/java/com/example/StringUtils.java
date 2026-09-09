@@ -46,6 +46,19 @@ public final class StringUtils {
     }
 
     /**
+     * Capitalizes the first character of the string and lowercases the rest.
+     *
+     * @param input the string to capitalize (may be null)
+     * @return capitalized string, or null if input is null
+     */
+    public static String capitalize(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+        return Character.toUpperCase(input.charAt(0)) + input.substring(1).toLowerCase();
+    }
+
+    /**
      * Truncates the string to the given max length, appending "..." if truncated.
      *
      * @param input the string to truncate (may be null)

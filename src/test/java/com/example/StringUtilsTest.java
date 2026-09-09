@@ -84,6 +84,41 @@ class StringUtilsTest {
     }
 
     @Nested
+    @DisplayName("capitalize()")
+    class CapitalizeTest {
+
+        @Test
+        @DisplayName("capitalizes a lowercase word")
+        void lowercase() {
+            assertThat(StringUtils.capitalize("hello")).isEqualTo("Hello");
+        }
+
+        @Test
+        @DisplayName("lowercases the remainder of an uppercase word")
+        void uppercase() {
+            assertThat(StringUtils.capitalize("HELLO")).isEqualTo("Hello");
+        }
+
+        @Test
+        @DisplayName("returns null for null input")
+        void nullInput() {
+            assertThat(StringUtils.capitalize(null)).isNull();
+        }
+
+        @Test
+        @DisplayName("returns empty string unchanged")
+        void emptyInput() {
+            assertThat(StringUtils.capitalize("")).isEmpty();
+        }
+
+        @Test
+        @DisplayName("single character is upper-cased")
+        void singleChar() {
+            assertThat(StringUtils.capitalize("a")).isEqualTo("A");
+        }
+    }
+
+    @Nested
     @DisplayName("truncate()")
     class TruncateTest {
 
