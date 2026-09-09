@@ -59,6 +59,26 @@ public final class StringUtils {
     }
 
     /**
+     * Counts how many times {@code target} occurs in {@code input}.
+     *
+     * @param input the string to search (may be null)
+     * @param target the character to count
+     * @return number of occurrences, or 0 if input is null
+     */
+    public static int countOccurrences(String input, char target) {
+        if (input == null) {
+            return 0;
+        }
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == target) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
      * Truncates the string to the given max length, appending "..." if truncated.
      *
      * @param input the string to truncate (may be null)
