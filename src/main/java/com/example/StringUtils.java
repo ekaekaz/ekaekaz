@@ -68,4 +68,18 @@ public final class StringUtils {
         }
         return input.substring(0, maxLength - 3) + "...";
     }
+
+    /**
+     * Capitalizes the first character of the string and lower-cases the rest.
+     *
+     * @param input the string to capitalize (may be null)
+     * @return capitalized string, or null if input is null
+     */
+    public static String capitalize(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+        String lower = input.toLowerCase();
+        return Character.toUpperCase(lower.charAt(0)) + lower.substring(1);
+    }
 }
