@@ -5,6 +5,8 @@ package com.example;
  */
 public final class StringUtils {
 
+    private static final String ELLIPSIS = "...";
+
     private StringUtils() {
         // utility class
     }
@@ -63,9 +65,9 @@ public final class StringUtils {
         if (input.length() <= maxLength) {
             return input;
         }
-        if (maxLength < 3) {
+        if (maxLength < ELLIPSIS.length()) {
             return input.substring(0, maxLength);
         }
-        return input.substring(0, maxLength - 3) + "...";
+        return input.substring(0, maxLength - ELLIPSIS.length()) + ELLIPSIS;
     }
 }

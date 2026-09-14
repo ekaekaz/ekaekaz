@@ -8,6 +8,10 @@ import java.util.Objects;
  */
 public class PriceService {
 
+    private static final int MIN_DISCOUNT_PERCENT = 0;
+    private static final int MAX_DISCOUNT_PERCENT = 100;
+    private static final float PERCENT_SCALE = 100f;
+
     private final PriceClient client;
 
     public PriceService(PriceClient client) {
@@ -23,13 +27,13 @@ public class PriceService {
      * @throws IllegalArgumentException if discountPercent is out of range
      */
     public int discountedPrice(String sku, int discountPercent) {
-        if (discountPercent < 0 || discountPercent > 100) {
+        if (discountPercent < MIN_DISCOUNT_PERCENT || discountPercent > MAX_DISCOUNT_PERCENT) {
             throw new IllegalArgumentException(
                     "discountPercent must be 0-100, got " + discountPercent);
         }
-        int base = client.fetchPrice(sku);
-        int discount = Math.round(base * (discountPercent / 100f));
-        return Math.max(0, base - discount);
+        int basePrice = client.fetchPrice(sku);
+        int discountAmount = Math.round(basePrice * (discountPercent / PERCENT_SCALE));
+        return Math.max(0, basePrice - discountAmount);
     }
 
     /**

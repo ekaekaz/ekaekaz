@@ -15,9 +15,7 @@ public final class Clamp {
      * @throws IllegalArgumentException if min &gt; max
      */
     public static int clamp(int value, int min, int max) {
-        if (min > max) {
-            throw new IllegalArgumentException("min > max");
-        }
+        requireValidRange(min, max);
         return Math.max(min, Math.min(max, value));
     }
 
@@ -27,9 +25,13 @@ public final class Clamp {
      * @throws IllegalArgumentException if min &gt; max
      */
     public static double clamp(double value, double min, double max) {
+        requireValidRange(min, max);
+        return Math.max(min, Math.min(max, value));
+    }
+
+    private static void requireValidRange(double min, double max) {
         if (min > max) {
             throw new IllegalArgumentException("min > max");
         }
-        return Math.max(min, Math.min(max, value));
     }
 }

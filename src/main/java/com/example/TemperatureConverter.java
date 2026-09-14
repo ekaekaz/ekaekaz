@@ -8,6 +8,8 @@ import java.util.Objects;
  */
 public class TemperatureConverter {
 
+    private static final double ABSOLUTE_ZERO_CELSIUS = -273.15;
+
     private final RoundingStrategy rounding;
 
     public TemperatureConverter(RoundingStrategy rounding) {
@@ -23,17 +25,17 @@ public class TemperatureConverter {
     }
 
     public double celsiusToKelvin(double celsius) {
-        if (celsius < -273.15) {
+        if (celsius < ABSOLUTE_ZERO_CELSIUS) {
             throw new IllegalArgumentException("Below absolute zero");
         }
-        return rounding.round(celsius + 273.15);
+        return rounding.round(celsius - ABSOLUTE_ZERO_CELSIUS);
     }
 
     public double kelvinToCelsius(double kelvin) {
         if (kelvin < 0) {
             throw new IllegalArgumentException("Kelvin cannot be negative");
         }
-        return rounding.round(kelvin - 273.15);
+        return rounding.round(kelvin + ABSOLUTE_ZERO_CELSIUS);
     }
 
     /**
