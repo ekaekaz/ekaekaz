@@ -1,33 +1,33 @@
 # ekaekaz
 
-Java project with JUnit 5 unit tests and JaCoCo coverage enforcement.
+Java-проект с юнит-тестами на JUnit 5 и проверкой покрытия кода через JaCoCo.
 
-## Prerequisites
+## Требования
 
 - Java 17+
 - Maven 3.6+
 
-## Build & Test
+## Сборка и тесты
 
 ```bash
-# Fast local test loop (unit tests only)
+# Быстрый локальный прогон (только юнит-тесты)
 mvn -q -DskipITs test
 
-# Full build with coverage check (fails if <95% line or <85% branch)
+# Полная сборка с проверкой покрытия (падает, если <95% строк или <85% ветвей)
 mvn -q verify
 
-# View coverage report
+# Открыть отчёт о покрытии
 open target/site/jacoco/index.html
 ```
 
-## Project Structure
+## Структура проекта
 
 ```
 src/main/java/com/example/
-  Clamp.java                 — numeric clamping utility
-  PriceService.java          — discount calculator with injected PriceClient
-  StringUtils.java           — string manipulation utilities
-  TemperatureConverter.java  — temperature conversions with injected RoundingStrategy
+  Clamp.java                 — утилита ограничения числа в диапазоне
+  PriceService.java          — расчёт скидок с внедряемым PriceClient
+  StringUtils.java           — утилиты для работы со строками
+  TemperatureConverter.java  — конвертация температур с внедряемой RoundingStrategy
 
 src/test/java/com/example/
   ClampTest.java
@@ -36,9 +36,9 @@ src/test/java/com/example/
   TemperatureConverterTest.java
 ```
 
-## Coverage Policy
+## Политика покрытия
 
-- **Line coverage ≥ 95%** (enforced by JaCoCo)
-- **Branch coverage ≥ 85%** (enforced by JaCoCo)
+- **Покрытие строк ≥ 95%** (проверяется JaCoCo)
+- **Покрытие ветвей ≥ 85%** (проверяется JaCoCo)
 
-Build fails if thresholds are not met.
+Сборка падает, если пороги не достигнуты.
