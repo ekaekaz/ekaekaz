@@ -22,7 +22,7 @@ open target/site/jacoco/index.html
 
 ## Project Structure
 
-```
+```text
 src/main/java/com/example/
   Clamp.java                 — numeric clamping utility
   PriceService.java          — discount calculator with injected PriceClient
